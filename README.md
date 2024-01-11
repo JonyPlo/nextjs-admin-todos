@@ -33,7 +33,7 @@ yarn prisma migrate dev
 yarn generate
 ```
 
-6. To create the local database with artificial data (SEED) send a GET request in the following endpoint ( [localhost:3000/api/seed](localhost:3000/api/seed) )
+6. To create the local database with artificial data (SEED) send a GET request in the following endpoint [localhost:3000/api/seed](localhost:3000/api/seed)
 
 7. Run the project:
 
