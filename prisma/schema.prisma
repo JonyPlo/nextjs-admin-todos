@@ -1,0 +1,22 @@
+// Este archivo con este contenido se crea automaticamente al realizar el comando "npx prisma init" o "pnpm dlx prisma init"
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// De esta forma creamos el modelo de como queremos que sean los todos que almacenaremos en la base de datos.
+// Este modelo Todo lo creo yo, no lo crea prisma
+model Todo {
+  id          String   @id @default(uuid())
+  description String
+  complete    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
