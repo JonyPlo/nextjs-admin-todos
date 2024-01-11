@@ -2,15 +2,48 @@
 
 ## Steps to star working in dev mode
 
-1. Up database:
+1. Install dependencies:
+
+```bash
+pnpm i
+# or
+npm i
+# or
+yarn
+```
+
+2. Build up database (Docker desktop required):
 
 ```bash
 docker compose up -d
 ```
 
-2. Rename .env.template file to .env
-3. Replace environment variables
-4. Execute SEED to [create the local data base](localhost:3000/api/seed)
+3. Create a copy of .env.template file and rename to .env
+4. Replace environment variables with your values
+5. Execute these commands of Prisma:
+
+```bash
+pnpm dlx prisma migrate dev
+pnpm dlx generate
+# or
+npx prisma migrate dev
+npx generate
+# or
+yarn prisma migrate dev
+yarn generate
+```
+
+6. To create the local database with artificial data send a GET request in the following endpoint ( [localhost:3000/api/seed](localhost:3000/api/seed) )
+
+7. Run the project:
+
+```bash
+pnpm dev
+# or
+npm run dev
+# or
+yarn dev
+```
 
 ## Prisma commands
 
@@ -20,6 +53,10 @@ docker compose up -d
 
 ```bash
 pnpm dlx prisma init
+# or
+npx prisma init
+# or
+yarn prisma init
 ```
 
 ### Migrate Prisma model with the database
@@ -29,6 +66,10 @@ Recordar que cada vez que hagamos un cambio en el archivo de prisma habrá que r
 
 ```bash
 pnpm dlx prisma migrate dev
+# or
+npx prisma migrate dev
+# or
+yarn prisma migrate dev
 ```
 
 ### Generate Prisma Client
@@ -37,6 +78,10 @@ pnpm dlx prisma migrate dev
 
 ```bash
 pnpm dlx generate
+# or
+npx generate
+# or
+yarn generate
 ```
 
 ## Prod
