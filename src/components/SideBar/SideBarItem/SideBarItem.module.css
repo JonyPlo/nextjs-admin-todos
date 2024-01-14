@@ -1,0 +1,7 @@
+.link {
+  @apply relative px-4 py-3 flex items-center space-x-4 rounded-xl text-black hover:bg-gradient-to-r hover:from-gray-600 hover:to-gray-400 hover:text-white;
+}
+
+.active-link {
+  @apply text-white bg-gradient-to-r from-sky-600 to-cyan-400;
+}

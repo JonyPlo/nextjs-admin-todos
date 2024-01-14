@@ -1,7 +1,3 @@
-// Este archivo con este contenido se crea automaticamente al realizar el comando "npx prisma init" o "pnpm dlx prisma init"
-
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,8 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// De esta forma creamos el modelo de como queremos que sean los todos que almacenaremos en la base de datos.
-// Este modelo Todo lo creo yo, no lo crea prisma
+// A este modelo tambien podemos usarlo como un 'type' para typescript ya que se crea en el cliente de prisma y luego podemos importarlo desde ahi, el type se crea de esta forma:
+// type Todo = {
+//     id: string;
+//     description: string;
+//     complete: boolean;
+//     createdAt: Date;
+//     updatedAt: Date;
+// }
 model Todo {
   id          String   @id @default(uuid())
   description String

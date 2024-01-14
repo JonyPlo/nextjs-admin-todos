@@ -4,8 +4,10 @@ import * as yup from 'yup'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const take = Number(searchParams.get('take') ?? '10') // Cantidad de items que se devolvera
-  const skip = Number(searchParams.get('skip') ?? '0') // Cantidad de items que se salteara
+  // Cantidad de items que se devolvera
+  const take = Number(searchParams.get('take') ?? '10')
+  // Cantidad de items que se salteara
+  const skip = Number(searchParams.get('skip') ?? '0')
 
   if (isNaN(take)) {
     return NextResponse.json(
@@ -46,5 +48,21 @@ export async function POST(request: Request) {
     return NextResponse.json(todo)
   } catch (error) {
     return NextResponse.json(error, { status: 400 })
+  }
+}
+
+// Delete completed todos
+export async function DELETE() {
+  try {
+    await prisma.todo.deleteMany({
+      where: { complete: true },
+    })
+
+    return NextResponse.json({
+      ok: true,
+      message: 'Completed todos deleted',
+    })
+  } catch (error) {
+    return NextResponse.json({ ok: false, error }, { status: 400 })
   }
 }

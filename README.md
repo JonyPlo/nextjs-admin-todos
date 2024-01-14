@@ -24,13 +24,13 @@ docker compose up -d
 
 ```bash
 pnpm dlx prisma migrate dev
-pnpm dlx generate
+pnpm dlx prisma generate
 # or
 npx prisma migrate dev
-npx generate
+npx prisma generate
 # or
 yarn prisma migrate dev
-yarn generate
+yarn prisma generate
 ```
 
 6. To create the local database with artificial data (SEED) send a GET request in the following endpoint [http://localhost:3000/api/seed](http://localhost:3000/api/seed)
@@ -77,11 +77,11 @@ yarn prisma migrate dev
 <!-- Esto nos generara un cliente de prisma para poder manipular la base de datos -->
 
 ```bash
-pnpm dlx generate
+pnpm dlx prisma generate
 # or
-npx generate
+npx prisma generate
 # or
-yarn generate
+yarn prisma generate
 ```
 
 ## Prod
