@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react'
 import { IoTrashOutline } from 'react-icons/io5'
 // import * as todosApi from '@/todos/helpers/todos'
 // import { useRouter } from 'next/navigation'
-import { addTodo } from '@/todos/actions/todo-actions'
+import { addTodo, deletedCompletedTodos } from '@/todos/actions/todo-actions'
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('')
@@ -45,12 +45,6 @@ export const NewTodo = () => {
     setDescription('')
   }
 
-  //* Funcion con server actions
-  const onDeleteCompletedTodos = async () => {
-    // const res = await todosApi.deleteCompletedTodos()
-    // if (!res?.ok) return
-  }
-
   return (
     <form onSubmit={onSubmit} className='flex'>
       <input
@@ -68,7 +62,7 @@ export const NewTodo = () => {
       </button>
       <span className='flex grow'></span>
       <button
-        onClick={onDeleteCompletedTodos}
+        onClick={() => deletedCompletedTodos()}
         type='button'
         className='flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all'
       >
