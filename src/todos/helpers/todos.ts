@@ -19,10 +19,10 @@ export const updateTodo = async (
   try {
     const dbTodo = await fetch(`/api/todos/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application.json',
       },
+      body: JSON.stringify(body),
     }).then((res) => res.json())
 
     return dbTodo

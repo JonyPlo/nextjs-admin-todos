@@ -1,7 +1,8 @@
 import prisma from '@/lib/prisma'
 import { NewTodo, TodosGrid } from '@/todos'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Todos list',
   description: 'Todos list',
 }

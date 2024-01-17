@@ -2,28 +2,53 @@
 
 import { FormEvent, useState } from 'react'
 import { IoTrashOutline } from 'react-icons/io5'
-import * as todosApi from '@/todos/helpers/todos'
-import { useRouter } from 'next/navigation'
+// import * as todosApi from '@/todos/helpers/todos'
+// import { useRouter } from 'next/navigation'
+import { addTodo } from '@/todos/actions/todo-actions'
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('')
-  const router = useRouter()
+  // const router = useRouter()
 
+  //! Funcion sin server action
+  // const onSubmit = async (e: FormEvent) => {
+  //   e.preventDefault()
+
+  //   if (description.trim().length === 0) return
+  //   await todosApi.createTodo(description)
+  //   setDescription('')
+
+  //   router.refresh()
+  // }
+
+  // const onDeleteCompletedTodos = async () => {
+  //   const res = await todosApi.deleteCompletedTodos()
+  //   if (!res?.ok) return
+
+  //   router.refresh()
+  // }
+
+  //! Funcion sin server action
+  // const onDeleteCompletedTodos = async () => {
+  //   const res = await todosApi.deleteCompletedTodos()
+  //   if (!res?.ok) return
+
+  //   router.refresh()
+  // }
+
+  //* Funcion con server actions
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     if (description.trim().length === 0) return
-    await todosApi.createTodo(description)
+    await addTodo(description) // <- Action
     setDescription('')
-
-    router.refresh()
   }
 
+  //* Funcion con server actions
   const onDeleteCompletedTodos = async () => {
-    const res = await todosApi.deleteCompletedTodos()
-    if (!res?.ok) return
-
-    router.refresh()
+    // const res = await todosApi.deleteCompletedTodos()
+    // if (!res?.ok) return
   }
 
   return (
