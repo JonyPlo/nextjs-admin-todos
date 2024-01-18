@@ -6,8 +6,10 @@ import { IoCheckboxOutline, IoSquareOutline } from 'react-icons/io5'
 import { startTransition, useOptimistic } from 'react'
 
 interface Props {
+  // State
   todo: Todo
-  // Todo: Acciones que quiero llamar
+
+  // Actions
   toggleTodo: (id: string, complete: boolean) => Promise<Todo | void>
 }
 

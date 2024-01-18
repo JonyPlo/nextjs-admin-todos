@@ -4,7 +4,7 @@ import { Todo } from '@prisma/client'
 import { TodoItem } from '../..'
 
 // import * as todosApi from '@/todos/helpers/todos'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { toggleTodo } from '@/todos/actions/todo-actions'
 
 interface Props {
@@ -13,7 +13,8 @@ interface Props {
 
 export const TodosGrid = ({ todos = [] }: Props) => {
   // useRouter solo puede ser usado del lado del cliente
-  const router = useRouter() // Tomar el useRouter desde 'next/navigation', no desde 'next/router'
+  // Tomar el useRouter desde 'next/navigation', no desde 'next/router'
+  // const router = useRouter()
 
   //! Funcion sin usar server actions
   // const onToggleTodo = async (id: string, complete: boolean) => {

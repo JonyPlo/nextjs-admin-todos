@@ -25,6 +25,7 @@ export default async function RestTodosPage() {
 
   return (
     <div>
+      <h1 className='text-3xl mb-5'>Normal Rest</h1>
       <div className='mb-5'>
         <NewTodo />
       </div>

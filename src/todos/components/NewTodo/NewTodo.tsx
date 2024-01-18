@@ -62,6 +62,7 @@ export const NewTodo = () => {
       </button>
       <span className='flex grow'></span>
       <button
+        // A la funcion deletedCompletedTodos hay que llamarla dentro del callback porque si la llamamos implícitamente le estaríamos mandando el objeto 'event' que es un objeto con propiedades, funciones, etc. y una funcion que es un 'action' como lo es deletedCompletedTodos solo debe recibir objetos literales o primitivos
         onClick={() => deletedCompletedTodos()}
         type='button'
         className='flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all'
