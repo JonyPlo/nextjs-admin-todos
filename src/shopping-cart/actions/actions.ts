@@ -5,7 +5,9 @@ import { getCookie, hasCookie, setCookie } from 'cookies-next'
 export const getCookieCart = (): { [id: string]: number } => {
   // Con el metodo hasCookie de la libreria cookies-next podemos saber si existe o no una cookie, y para eso tenemos que mandar la key de como se llama la cookie
   if (hasCookie('cart')) {
-    const cookieCart = JSON.parse((getCookie('cart') as string) ?? '{}')
+    const cookieCart = JSON.parse(getCookie('cart') ?? '{}') as {
+      [id: string]: number
+    }
 
     return cookieCart
   }
@@ -28,5 +30,15 @@ export const addProductToCart = (id: string) => {
 export const removeProductFromCart = (id: string) => {
   const cookieCart = getCookieCart()
   delete cookieCart[id]
+  setCookie('cart', JSON.stringify(cookieCart))
+}
+
+export const removeSingleItemFromCart = (id: string) => {
+  const cookieCart = getCookieCart()
+
+  if (!cookieCart[id]) return
+  cookieCart[id] -= 1
+  if (cookieCart[id] <= 0) delete cookieCart[id]
+
   setCookie('cart', JSON.stringify(cookieCart))
 }
