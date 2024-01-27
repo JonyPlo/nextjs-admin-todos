@@ -35,6 +35,11 @@ yarn prisma generate
 
 6. To create the local database with artificial data (SEED) send a GET request in the following endpoint [http://localhost:3000/api/seed](http://localhost:3000/api/seed)
 
+> [!IMPORTANT]
+> The user by default is:
+> **user:** test1@google.com
+> **password:** 123456
+
 7. Run the project:
 
 ```bash

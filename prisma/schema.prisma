@@ -21,6 +21,14 @@ model Todo {
   complete    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // De esta forma estoy diciendo que la propiedad 'todos' de los usuarios sera un arreglo de todos que estan en mi base de datos, ahora para saber que todo pertenece a cada usuario hay que crear una relacion entre los modelos y eso es lo que estamos haciendo aqui, estamos haciendo que los todos dependan del user, por lo tanto no se podra crear un todo si no es mediante un usuario.
+  // En este caso estamos creando una relacion, en donde el primer argumento 'fields' es el id del todo y el segundo argumento 'references' es el id del usuario que creo ese todo
+  user User @relation(fields: [userId], references: [id])
+
+  // En userId almacenamos el id del usuario que esta logueado
+  //* Esta es la creadion de la columna 'userId' en la tabla de todos
+  userId String
 }
 
 // Auth.js
@@ -55,6 +63,7 @@ model Session {
 model User {
   id            String    @id @default(uuid())
   name          String?
+  password      String?
   roles         String[]  @default(["user"])
   isActive      Boolean   @default(true)
   email         String?   @unique
@@ -63,6 +72,9 @@ model User {
 
   accounts Account[]
   sessions Session[]
+
+  // Aqui estamos agregando al objeto del usuario una propiedad llamada 'todos' en la cual almacenamos los todos relacionados con este usuario
+  todos Todo[]
 }
 
 model VerificationToken {

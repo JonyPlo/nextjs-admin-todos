@@ -2,31 +2,25 @@
 
 import { FormEvent, useState } from 'react'
 import { IoTrashOutline } from 'react-icons/io5'
-// import * as todosApi from '@/todos/helpers/todos'
+import * as todosApi from '@/todos/helpers/todos'
 // import { useRouter } from 'next/navigation'
 import { addTodo, deletedCompletedTodos } from '@/todos/actions/todo-actions'
+import { useRouter } from 'next/navigation'
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('')
-  // const router = useRouter()
+  const router = useRouter()
 
   //! Funcion sin server action
-  // const onSubmit = async (e: FormEvent) => {
-  //   e.preventDefault()
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault()
 
-  //   if (description.trim().length === 0) return
-  //   await todosApi.createTodo(description)
-  //   setDescription('')
+    if (description.trim().length === 0) return
+    await todosApi.createTodo(description) // <- Rest Full Api
+    setDescription('')
 
-  //   router.refresh()
-  // }
-
-  // const onDeleteCompletedTodos = async () => {
-  //   const res = await todosApi.deleteCompletedTodos()
-  //   if (!res?.ok) return
-
-  //   router.refresh()
-  // }
+    router.refresh()
+  }
 
   //! Funcion sin server action
   // const onDeleteCompletedTodos = async () => {
@@ -37,13 +31,14 @@ export const NewTodo = () => {
   // }
 
   //* Funcion con server actions
-  const onSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+  // const onSubmit = async (e: FormEvent) => {
+  //   e.preventDefault()
 
-    if (description.trim().length === 0) return
-    await addTodo(description) // <- Action
-    setDescription('')
-  }
+  //   if (description.trim().length === 0) return
+
+  //   await addTodo(description) // <- Action
+  //   setDescription('')
+  // }
 
   return (
     <form onSubmit={onSubmit} className='flex'>

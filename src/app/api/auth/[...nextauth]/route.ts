@@ -21,6 +21,8 @@ import NextAuth, { type NextAuthOptions } from 'next-auth'
 import { type Adapter } from 'next-auth/adapters'
 import GoogleProvider from 'next-auth/providers/google'
 import GithubProvider from 'next-auth/providers/github'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { signInEmailPassword } from '../actions/auth-actions'
 
 // En esta constante vamos a definir nuestros providers
 export const authOptions: NextAuthOptions = {
@@ -39,9 +41,43 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_CLIENT_ID ?? '',
       clientSecret: process.env.GITHUB_CLIENT_SECRET ?? '',
     }),
+
+    // Credentials
+    CredentialsProvider({
+      // La propiedad name es opcional
+      name: 'Credentials',
+
+      // La propiedad credentials es obligatoria y estos son los campos que se mostraran en la pantalla de login para poder iniciar sesion
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'jony_plo@gmail.com',
+        },
+        password: {
+          label: 'Password',
+          type: 'password',
+          placeholder: '******',
+        },
+      },
+
+      // El metodo authorize es obligatorio y es la funcion que recibirá las credenciales y las procesara para determinar si el usuario pudo loguearse correctamente o no
+      async authorize(credentials, req) {
+        const user = await signInEmailPassword(
+          credentials!.email,
+          credentials!.password
+        )
+
+        if (user) {
+          return user
+        }
+
+        return null
+      },
+    }),
   ],
 
-  // Aqui indicamos que la sesion este manejada por la estrategia de jwt
+  // Aqui indicamos que la sesion este manejada por la estrategia de jwt, es decir, todo mediante tokens
   session: {
     strategy: 'jwt',
   },
@@ -66,9 +102,9 @@ export const authOptions: NextAuthOptions = {
       })
 
       // Esta condicional es para evitar que un usuario pueda iniciar sesion con una cuenta desactivada, es una medida de seguridad para evitar que alguien 'bloqueado' pueda iniciar sesion
-      if (!dbUser?.isActive) {
-        throw Error('No active user')
-      }
+      // if (!dbUser?.isActive) {
+      //   throw Error('No active user')
+      // }
 
       // Una vez que ya se encontro el usuario vamos a modificar el token agregando 2 propiedades, los roles y el id del usuario que acabamos de encontrar
       token.roles = dbUser?.roles ?? ['no-roles']

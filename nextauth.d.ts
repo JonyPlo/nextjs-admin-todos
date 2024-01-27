@@ -21,3 +21,26 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT extends IUser {}
 }
+
+// Forma de hacerlo con Auth.js
+// import 'next-auth'
+
+// declare module 'next-auth' {
+//   interface User {
+//     roles?: string[]
+//     id: string
+//   }
+
+//   interface Account {}
+
+//   interface Session {
+//     user?: User
+//   }
+// }
+
+// declare module 'next-auth/jwt' {
+//   interface JWT {
+//     roles?: string[]
+//     id: string
+//   }
+// }
